@@ -7,6 +7,7 @@ const loginbtn ='//button[@type="submit"]';
 
 test("Login to Counsellor Portal", async ({page}) => {
     await page.goto(counsellorPortal.URL);
+    await page.setViewportSize({ width: 1920, height: 1080 });
     let PageTitle :string =await page.title();
     console.log("Title of the Page",  PageTitle);
     await page.waitForTimeout(5000);
@@ -16,7 +17,6 @@ test("Login to Counsellor Portal", async ({page}) => {
     let logo:Locator= await page.getByAltText('ConnectED School', {exact : true});
      await logo.click();
     await expect(logo).toBeVisible();
-
     await page.fill(userName,counsellorPortal.username);
     await page.fill(passWord,counsellorPortal.password);
     await page.locator('//button[@type="submit"]').click();
@@ -26,33 +26,23 @@ test("Login to Counsellor Portal", async ({page}) => {
 
 test(`Fetch MObile name suggestion`, async ({page})=>{
  await page.goto("https://www.amazon.in/");
-
  await page.waitForTimeout(1000);
- let PageTitle :string =await page.title();
-    console.log("Title of the Page",  PageTitle);
-    
-    
-
-    const searchlist =await page.locator('//input[@id="twotabsearchtextbox"]');
-
-    await searchlist.fill("Samsung s24");
-
-   await expect(searchlist.first()).toBeVisible();
-    
-    const suggestions = await page.locator('//div[@id="nav-flyout-searchAjax"]//div[@role="button"]');
-
-         await expect(suggestions.first()).toBeVisible(); 
-    const countt=await suggestions.count();
-    const newSuggestions=[];
-  
-
+   await page.setViewportSize({ width: 1920, height: 1080});
+   let PageTitle :string =await page.title();
+   console.log("Title of the Page",  PageTitle);
+   const searchlist =await page.locator('//input[@id="twotabsearchtextbox"]');
+   await searchlist.fill("Samsung s24");
+   await expect(searchlist.first()).toBeVisible();  
+   const suggestions = await page.locator('//div[@id="nav-flyout-searchAjax"]//div[@role="button"]');
+   await expect(suggestions.first()).toBeVisible(); 
+   const countt=await suggestions.count();
+   console.log(countt)
+   const newSuggestions=[];
     for(let i=0; i < countt; i++){
       const suggestionsTexts = await suggestions.nth(i).getAttribute("aria-label");
-      newSuggestions.push(suggestionsTexts);
-    if(suggestionsTexts){
- console.log(suggestionsTexts);
-
+       newSuggestions.push(suggestionsTexts);
+       if(suggestionsTexts){
+        console.log(suggestionsTexts);
     }}
-
 });
 
