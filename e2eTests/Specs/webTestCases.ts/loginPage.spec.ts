@@ -9,11 +9,10 @@ const userName = `//input[@id="email"]`;
 const passWord =`//input[@id="password"]`;
 const loginbtn ='//button[@type="submit"]';
 
-test.describe.configure({mode : 'parallel'});
 
 test("Login to Counsellor Portal", async ({page}) => {
   // const page=getPage();
-    await page.goto(counsellorPortal.URL);
+    await page.goto("https://counsellor-portal.d1mh5283xiycpb.amplifyapp.com/auth/login");
     // await page.setViewportSize({ width: 1920, height: 1080 });
     let PageTitle :string =await page.title();
     console.log("Title of the Page",  PageTitle);
@@ -21,7 +20,8 @@ test("Login to Counsellor Portal", async ({page}) => {
     // await expect(page).toHaveTitle(/School Management/);
     // let reverse= PageTitle.split("").reverse().join("")
     // console.log(reverse);
-    let logo: Locator= await page.getByAltText('ConnectED School', {exact : true});
+    let logo: Locator= page.getByAltText('ConnectED School', {exact : true});
+    await expect(logo).toBeVisible({ timeout: 30000 });
      await logo.click();
     await expect(logo).toBeVisible();
     await page.fill(userName,counsellorPortal.username);
