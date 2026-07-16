@@ -26,7 +26,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Execute Tests
-        run: npx playwright test e2eTests/Specs/webTestCases.ts
+        run: npx playwright test e2eTests/Specs --workers=1
 
       - name: Upload Allure Results
         if: always()
