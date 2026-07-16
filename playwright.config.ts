@@ -20,7 +20,7 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 2 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [['list'],['allure-playwright']],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -29,12 +29,12 @@ export default defineConfig({
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
 
     headless: false,
-    viewport:
-    {width: 1440,
-    height: 900},
+    // viewport:
+    // {width: 1440,
+    // height: 900},
     
     video: 'on',
     // launchOptions: {
@@ -47,7 +47,15 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'] ,
+       viewport: { width: 1600, height: 1000 },
+        launchOptions: {
+          args: ['--disable-web-security'],
+          /* --auto-open-devtools-for-tabs option is used to open a test with Network tab for debugging. It can help in analyzing network requests and responses.*/
+          // args: ["--disable-web-security","--auto-open-devtools-for-tabs"],
+          slowMo: 0,
+        },
+      },
     },
 
  

@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "clean": "rimraf allure-results allure-report test-results playwright-report",
+    "test": "npm run clean && npx playwright test",
+    "allure": "allure generate allure-results --clean && allure open"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -12,6 +16,7 @@
     "@playwright/test": "^1.58.2",
     "@types/node": "^25.3.0",
     "allure-commandline": "^2.40.0",
-    "allure-playwright": "^3.8.0"
+    "allure-playwright": "^3.8.0",
+    "rimraf": "^6.1.3"
   }
 }
