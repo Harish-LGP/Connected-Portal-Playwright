@@ -10,7 +10,7 @@ const passWord =`//input[@id="password"]`;
 const loginbtn ='//button[@type="submit"]';
 
 
-test("Login to Counsellor Portal", async ({page}) => {
+test("@smokeLogin to Counsellor Portal", async ({page}) => {
     await page.goto("https://counsellor-portal.d1mh5283xiycpb.amplifyapp.com/auth/login");
     // await page.setViewportSize({ width: 1920, height: 1080 });
     let PageTitle :string =await page.title();
