@@ -32,9 +32,9 @@ test("@smokeLogin to Counsellor Portal", async ({page}) => {
 
 test(`Fetch MObile name suggestion`, async ({page})=>{
  await page.goto("https://www.amazon.in/");
-//  await page.waitForTimeout(2000);
+ await page.waitForTimeout(2000);
 await expect(
-  page.locator('#twotabsearchtextbox')
+  page.locator('//input[@id="twotabsearchtextbox"]')
 ).toBeVisible({ timeout: 60000 });
 //  await page.waitForLoadState('load');
 //  await page.waitForLoadState('networkidle');
@@ -67,12 +67,9 @@ await expect(
 
       const coption=await page.locator("#country option");
       const count1 =await coption.count();
-      console.log(coption.count());
-      for(let i=0; i< count1; i++){
-        const contry=await coption.nth(i).allInnerTexts();
-        console.log(contry)
-
-
+       console.log("Total Countries:", count1 - 1);
+      for(let i=1; i< count1; i++){
+        const contry=await coption.nth(i).innerText();
+        console.log(contry.trim());
       }
-
-    })
+    });
