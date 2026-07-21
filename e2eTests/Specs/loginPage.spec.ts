@@ -5,7 +5,7 @@ test(`login to portal`, async({page :Page})=>{
  await login.loginToPage(Page);
 });
 
-test.skip(`Switch to Pages`, async({page : Page})=>{
+test(`Switch to Pages`, async({page : Page})=>{
 await login.SwitchPages(Page);
 });
 
@@ -13,13 +13,8 @@ test(`Verify File Upload `, async({page:Page})=>{
     await login.fileUpload(Page);
 });
 
-const userName = `//input[@id="email"]`;
-const passWord =`//input[@id="password"]`;
-const loginbtn ='//button[@type="submit"]';
 
-
-
-test(`Fetch MObile name suggestion`, async ({page})=>{
+test.only(`Fetch MObile name suggestion`, async ({page})=>{
  await page.goto("https://www.amazon.in/");
  await page.waitForTimeout(2000);
 await expect(
