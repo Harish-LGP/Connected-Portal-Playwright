@@ -1,34 +1,23 @@
+import * as login from "../Pages/loginPage.page";
+import {test, expect, Page} from "@playwright/test"
 
-import { test , getPage } from '../../../src/Setup/page-setup';
-import { Expect, Locator, expect } from '@playwright/test';
-import { counsellorPortal } from '../../../e2eTests/testdata/webtestdata';
+test(`login to portal`, async({page :Page})=>{
+ await login.loginToPage(Page);
+});
 
+test.skip(`Switch to Pages`, async({page : Page})=>{
+await login.SwitchPages(Page);
+});
 
+test(`Verify File Upload `, async({page:Page})=>{
+    await login.fileUpload(Page);
+});
 
 const userName = `//input[@id="email"]`;
 const passWord =`//input[@id="password"]`;
 const loginbtn ='//button[@type="submit"]';
 
 
-test("@smokeLogin to Counsellor Portal", async ({page}) => {
-    await page.goto("https://counsellor-portal.d1mh5283xiycpb.amplifyapp.com/auth/login");
-    // await page.setViewportSize({ width: 1920, height: 1080 });
-    let PageTitle :string =await page.title();
-    console.log("Title of the Page",  PageTitle);
-    await page.waitForTimeout(5000);
-    // await expect(page).toHaveTitle(/School Management/);
-    // let reverse= PageTitle.split("").reverse().join("")
-    // console.log(reverse);
-    let logo: Locator= page.getByAltText('ConnectED School', {exact : true});
-    await expect(logo).toBeVisible({ timeout: 30000 });
-     await logo.click();
-    await expect(logo).toBeVisible();
-    await page.fill(userName,counsellorPortal.username);
-    await page.fill(passWord,counsellorPortal.password);
-    await page.locator('//button[@type="submit"]').click();
-      await page.waitForTimeout(5000);
-      
-});
 
 test(`Fetch MObile name suggestion`, async ({page})=>{
  await page.goto("https://www.amazon.in/");
