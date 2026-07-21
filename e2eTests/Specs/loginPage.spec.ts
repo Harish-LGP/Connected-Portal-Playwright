@@ -14,7 +14,7 @@ test(`Verify File Upload `, async({page:Page})=>{
 });
 
 
-test.only(`Fetch MObile name suggestion`, async ({page})=>{
+test(`Fetch MObile name suggestion`, async ({page})=>{
  await page.goto("https://www.amazon.in/");
  await page.waitForTimeout(2000);
 await expect(
